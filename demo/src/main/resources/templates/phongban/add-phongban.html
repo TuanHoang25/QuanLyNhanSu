@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Phòng Ban</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2 class="mt-5">Thêm Phòng Ban</h2>
+    <form th:action="@{/phongban/add}" th:object="${PHONGBAN}" method="post">
+        <div class="form-group">
+            <label for="ma_phong">Mã Phòng</label>
+            <input type="text" class="form-control" id="ma_phong" th:field="*{ma_phong}" maxlength="2" required>
+            <div th:if="${#fields.hasErrors('ma_phong')}" class="alert alert-danger">
+                <p th:each="err : ${#fields.errors('ma_phong')}" th:text="${err}">Error</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="ten_phong">Tên Phòng</label>
+            <input type="text" class="form-control" id="ten_phong" th:field="*{ten_phong}" maxlength="30" required>
+            <div th:if="${#fields.hasErrors('ten_phong')}" class="alert alert-danger">
+                <p th:each="err : ${#fields.errors('ten_phong')}" th:text="${err}">Error</p>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Thêm</button>
+    </form>
+<!--    <div th:if="${param.success}">-->
+<!--        <p class="alert alert-success mt-3">Thêm phòng ban thành công!</p>-->
+<!--    </div>-->
+</div>
+</body>
+</html>

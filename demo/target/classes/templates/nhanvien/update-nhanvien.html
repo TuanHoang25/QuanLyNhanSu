@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Update Nhân viên</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<section layout:fragment="content" class="container mt-5">
+    <h1>Edit Nhân viên</h1>
+    <form th:action="@{/nhanvien/update/{id}(id=${NHANVIEN.Ma_nv})}"
+          th:object="${NHANVIEN}" method="post" class="needs-validation" novalidate>
+
+        <!-- Hidden field for Ma_nv -->
+        <input type="hidden" th:field="*{Ma_nv}" />
+
+        <div class="mb-3">
+            <label for="ten_nv" class="form-label">Tên:</label>
+            <input type="text" th:field="*{ten_nv}" class="form-control" id="ten_nv"
+                   required>
+            <div class="text-danger" th:if="${#fields.hasErrors('ten_nv')}"
+                 th:errors="*{ten_nv}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="phai" class="form-label">Phái:</label>
+            <input type="text" th:field="*{phai}" class="form-control" id="phai"
+                   required>
+            <div class="text-danger" th:if="${#fields.hasErrors('phai')}"
+                 th:errors="*{phai}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="noi_sinh" class="form-label">Nơi sinh:</label>
+            <input type="text" th:field="*{noi_sinh}" class="form-control" id="noi_sinh"
+                   required>
+            <div class="text-danger" th:if="${#fields.hasErrors('noi_sinh')}"
+                 th:errors="*{noi_sinh}"></div>
+        </div>
+        <div class="mb-3" >
+            <label for="luong">Lương:</label>
+            <input type="number" id="luong" th:field="*{luong}" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="phongban" class="form-label">Phòng ban:</label>
+            <select th:field="*{phongban}" class="form-control" id="phongban">
+                <option th:each="pb : ${phong_ban}"
+                        th:value="${pb.ma_phong}" th:text="${pb.ten_phong}"
+                        th:selected="${pb.ma_phong == NHANVIEN.phongban.ma_phong}"></option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a th:href="@{/nhanvien}" class="btn btn-link">Cancel</a>
+    </form>
+</section>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+</script>
+</body>
+</html>
